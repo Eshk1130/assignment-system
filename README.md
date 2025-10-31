@@ -1,70 +1,176 @@
-# Getting Started with Create React App
+# Student Assignment Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A comprehensive dashboard for managing student assignments with role-based access for students and teachers.
 
-## Available Scripts
+##  Project Structure
 
-In the project directory, you can run:
+src/
+├── contexts/
+│   └── AppContext.jsx          
+├── utils/
+│   └── helpers.js              
+├── components/
+│   ├── common/
+│   │   ├── Header.jsx          
+│   │   ├── TabNavigation.jsx   
+│   │   └── ConfirmationModal.jsx 
+│   ├── student/
+│   │   ├── AssignmentCard.jsx  
+│   │   ├── AssignmentsTab.jsx  
+│   │   ├── ProgressTab.jsx     
+│   │   └── StudentDashboard.jsx
+│   ├── teacher/
+│   │   ├── AssignmentForm.jsx  
+│   │   ├── AssignmentOverviewCard.jsx 
+│   │   ├── StudentProgressView.jsx
+│   │   └── TeacherDashboard.jsx
+│   └── LoginPage.jsx           
+├── App.jsx                     
+├── index.css                   
+└── index.js                    
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Setup Instructions
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerequisites
+- Node.js (v14 or higher)
+- npm or yarn
 
-### `npm test`
+### Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Create React App
+```bash
+npx create-react-app student-assignment-system
+cd student-assignment-system
+```
 
-### `npm run build`
+2. Install Dependencies
+```bash
+npm install lucide-react
+# or
+yarn add lucide-react
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Install Tailwind CSS
+```bash
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. Configure Tailwind - Update `tailwind.config.js`:
+```javascript
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+5. Copy All Component Files - Copy each component file into the appropriate directory as shown in the project structure above.
 
-### `npm run eject`
+6. Run the Application
+```bash
+npm start
+# or
+yarn start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+##  Demo Credentials
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Student Login
+- **Roll Number:** `2021001`, `2021002`, `2021003`, `2021004`
+- **Role:** Student
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Teacher Login
+- **Phone Number:** `9876543210`, `9876543211`
+- **Role:** Teacher
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+##  Features
 
-## Learn More
+### For Students
+-  View pending and submitted assignments
+-  Double-verification submission flow
+-  Progress tracking with detailed analytics
+-  Assignment marks and grade visualization
+-  Direct access to Google Drive submission links
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### For Teachers
+-  Create and manage assignments
+-  View submission statistics per assignment
+-  Track individual student progress with progress bars
+-  Assign marks to student submissions
+-  Visual analytics for class performance
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+##  Data Persistence
 
-### Code Splitting
+The application uses **localStorage** for data persistence:
+- User authentication state
+- Assignment data
+- Submission records
+- Marks and grades
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Data persists across browser sessions and page refreshes.
 
-### Analyzing the Bundle Size
+##  Tech Stack
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- **React.js** - UI framework
+- **Tailwind CSS** - Styling
+- **Lucide React** - Icon library
+- **Context API** - State management
+- **localStorage** - Data persistence
 
-### Making a Progressive Web App
+##  Responsive Design
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The application is fully responsive and works seamlessly on:
+- Desktop (1024px+)
+- Tablet (768px - 1023px)
+- Mobile (< 768px)
 
-### Advanced Configuration
+##  Customization
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Adding More Students/Teachers
+Edit `INITIAL_DATA` in `src/contexts/AppContext.jsx`:
 
-### Deployment
+```javascript
+users: [
+  { 
+    id: 'S005', 
+    name: 'New Student', 
+    role: 'student', 
+    identifier: '2021005' 
+  },
+  // ... more users
+]
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Modifying Styles
+Update Tailwind classes in component files or add custom CSS in `src/index.css`.
 
-### `npm run build` fails to minify
+## Troubleshooting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Lucide Icons Not Showing
+Make sure you've installed lucide-react:
+```bash
+npm install lucide-react
+```
+
+### Tailwind Styles Not Applied
+1. Check `tailwind.config.js` content paths
+2. Ensure `@tailwind` directives are in `index.css`
+3. Restart development server
+
+### localStorage Data Issues
+Clear application data:
+```javascript
+// In browser console
+localStorage.clear();
+// Then refresh the page
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to submit issues or pull requests.
