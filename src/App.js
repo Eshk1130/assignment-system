@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { AppProvider, useApp } from './contexts/AppContext';
+import LoginPage from './components/LoginPage';
+import StudentDashboard from './components/student/StudentDashboard';
+import TeacherDashboard from './components/teacher/TeacherDashboard';
+
+const AppContent = () => {
+  const { currentUser } = useApp();
+
+  if (!currentUser) {
+    return <LoginPage />;
+  }
+
+  if (currentUser.role === 'student') {
+    return <StudentDashboard />;
+  }
+
+  if (currentUser.role === 'teacher') {
+    return <TeacherDashboard />;
+  }
+
+  return null;
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppProvider>
+      <AppContent />
+    </AppProvider>
   );
 }
 
