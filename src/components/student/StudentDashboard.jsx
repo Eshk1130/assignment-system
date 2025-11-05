@@ -15,17 +15,16 @@ const StudentDashboard = () => {
   const [activeTab, setActiveTab] = useState('assignments');
   const [confirmModal, setConfirmModal] = useState({ isOpen: false, assignment: null });
 
-  // Get student's courses
   const studentCourses = courses?.filter(course => 
     course.studentIds.includes(currentUser.id)
   ) || [];
 
-  // Get assignments for selected course
+
   const courseAssignments = selectedCourse 
     ? (assignments?.filter(a => a.courseId === selectedCourse.id) || [])
     : [];
 
-  // Get student submissions
+
   const userSubmissions = submissions?.filter(sub => {
     if (sub.studentId === currentUser.id) return true;
     if (sub.groupId) {
@@ -35,7 +34,6 @@ const StudentDashboard = () => {
     return false;
   }) || [];
 
-  // Separate pending and submitted assignments
   const pendingAssignments = courseAssignments.filter(
     assignment => !userSubmissions.some(sub => sub.assignmentId === assignment.id)
   );
@@ -44,7 +42,7 @@ const StudentDashboard = () => {
     assignment => userSubmissions.some(sub => sub.assignmentId === assignment.id)
   );
 
-  // Calculate statistics
+  
   const totalMarks = userSubmissions.reduce((sum, sub) => sum + (sub.marks || 0), 0);
   const totalPossible = submittedAssignments.reduce(
     (sum, assignment) => sum + assignment.totalMarks, 
@@ -102,7 +100,7 @@ const StudentDashboard = () => {
     { id: 'progress', label: 'Progress' }
   ];
 
-  // Course Dashboard View
+
   if (!selectedCourse) {
     return (
       <div className="min-h-screen bg-gray-50">
@@ -139,7 +137,7 @@ const StudentDashboard = () => {
     );
   }
 
-  // Course Assignment View
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Header user={currentUser} onLogout={logout} />

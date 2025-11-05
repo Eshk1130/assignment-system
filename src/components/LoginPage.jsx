@@ -14,7 +14,7 @@ const LoginPage = () => {
     setIsLoading(true);
     setError('');
 
-    // Simulate JWT authentication delay
+  
     setTimeout(() => {
       const success = login(identifier, role);
       if (!success) {

@@ -25,18 +25,18 @@ const TeacherDashboard = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [selectedAssignment, setSelectedAssignment] = useState(null);
 
-  // Get teacher's courses with safe fallback
+
   const teacherCourses = courses?.filter(course => course.teacherId === currentUser.id) || [];
 
-  // Filter assignments for selected course
+ 
   const courseAssignments = selectedCourse 
     ? (assignments?.filter(a => a.courseId === selectedCourse.id) || [])
     : [];
 
-  // Get all students
+
   const students = users?.filter(user => user.role === 'student') || [];
 
-  // Get students in selected course
+  
   const courseStudents = selectedCourse
     ? students.filter(s => selectedCourse.studentIds.includes(s.id))
     : [];
@@ -53,7 +53,6 @@ const TeacherDashboard = () => {
     setSelectedAssignment(assignment);
   };
 
-  // Course Dashboard View
   if (!selectedCourse) {
     return (
       <div className="min-h-screen bg-gray-50">
@@ -96,7 +95,7 @@ const TeacherDashboard = () => {
     );
   }
 
-  // Course Assignment Management View
+  
   return (
     <div className="min-h-screen bg-gray-50">
       <Header user={currentUser} onLogout={logout} />
