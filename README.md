@@ -14,6 +14,8 @@ src/
 │   │   ├── Header.jsx          
 │   │   ├── TabNavigation.jsx   
 │   │   └── ConfirmationModal.jsx 
+        |__DemoGuide.jsx
+        |__Toast.jsx 
 │   ├── student/
 │   │   ├── AssignmentCard.jsx  
 │   │   ├── AssignmentsTab.jsx  
