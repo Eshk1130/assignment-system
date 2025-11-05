@@ -3,6 +3,7 @@ import { AppProvider, useApp } from './contexts/AppContext';
 import LoginPage from './components/LoginPage';
 import StudentDashboard from './components/student/StudentDashboard';
 import TeacherDashboard from './components/teacher/TeacherDashboard';
+import Toast from './components/common/Toast';
 
 const AppContent = () => {
   const { currentUser } = useApp();
@@ -26,6 +27,7 @@ function App() {
   return (
     <AppProvider>
       <AppContent />
+      <Toast />
     </AppProvider>
   );
 }

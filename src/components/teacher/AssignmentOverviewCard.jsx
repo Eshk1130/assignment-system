@@ -1,19 +1,28 @@
 import React from 'react';
-import { Calendar, Users, CheckCircle, Clock, ExternalLink } from 'lucide-react';
+import { Calendar, Users, CheckCircle, Clock, ExternalLink, User } from 'lucide-react';
 import { formatDate } from '../../utils/helpers';
 
 const AssignmentOverviewCard = ({ assignment, stats, onClick }) => {
   const { submitted, total, submissionRate } = stats;
+  const isGroupAssignment = assignment.submissionType === 'group';
 
   return (
     <div 
       onClick={onClick}
-      className="bg-white rounded-lg shadow-sm border border-gray-200 p-5 hover:shadow-md transition-shadow cursor-pointer"
+      className="bg-white rounded-lg shadow-sm border border-gray-200 p-5 hover:shadow-md transition-shadow cursor-pointer hover-lift animate-fadeIn"
     >
       <div className="mb-4">
-        <h3 className="text-lg font-semibold text-gray-900 mb-2">
-          {assignment.title}
-        </h3>
+        <div className="flex items-start justify-between mb-2">
+          <h3 className="text-lg font-semibold text-gray-900 flex-1">
+            {assignment.title}
+          </h3>
+          {isGroupAssignment && (
+            <span className="flex items-center gap-1 px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium ml-2">
+              <Users className="w-3 h-3" />
+              Group
+            </span>
+          )}
+        </div>
         <p className="text-sm text-gray-600 line-clamp-2">
           {assignment.description}
         </p>
@@ -25,7 +34,7 @@ const AssignmentOverviewCard = ({ assignment, stats, onClick }) => {
           Due: {formatDate(assignment.dueDate)}
         </div>
         <div className="flex items-center gap-2">
-          <Users className="w-4 h-4" />
+          <User className="w-4 h-4" />
           {assignment.totalMarks} marks
         </div>
       </div>
@@ -35,7 +44,7 @@ const AssignmentOverviewCard = ({ assignment, stats, onClick }) => {
         <div className="flex items-center justify-between text-sm mb-2">
           <span className="text-gray-600">Submission Progress</span>
           <span className="font-medium text-gray-900">
-            {submitted}/{total} students
+            {submitted}/{total} {isGroupAssignment ? 'groups' : 'students'}
           </span>
         </div>
         <div className="bg-gray-200 rounded-full h-3">

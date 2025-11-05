@@ -8,87 +8,167 @@ export const useApp = () => {
   return context;
 };
 
-//mock data
+// Enhanced Initial Data with Courses and Groups
 const INITIAL_DATA = {
   users: [
-    { id: 'S001', name: 'Eshmeet Kaur', role: 'student', identifier: '2021001' },
-    { id: 'S002', name: 'Bani Kaur', role: 'student', identifier: '2021002' },
-    { id: 'S003', name: 'Hargun Grover', role: 'student', identifier: '2021003' },
-    { id: 'S004', name: 'Akshit Gautum', role: 'student', identifier: '2021004' },
-    { id: 'T001', name: 'Dr. Amit Seth', role: 'teacher', identifier: '9876543210' },
-    { id: 'T002', name: 'Prof. Poonam Garg', role: 'teacher', identifier: '9876543211' },
+    // Students
+    { id: 'S001', name: 'Eshmeet Kaur', role: 'student', identifier: '2021001', email: 'eshmeet@university.edu' },
+    { id: 'S002', name: 'Bani Kaur', role: 'student', identifier: '2021002', email: 'bani@university.edu' },
+    { id: 'S003', name: 'Hargun Grover', role: 'student', identifier: '2021003', email: 'hargun@university.edu' },
+    { id: 'S004', name: 'Akshit Gautum', role: 'student', identifier: '2021004', email: 'akshit@university.edu' },
+    { id: 'S005', name: 'Daman', role: 'student', identifier: '2021005', email: 'daman@university.edu' },
+    { id: 'S006', name: 'Isha Kaur', role: 'student', identifier: '2021006', email: 'isha@university.edu' },
+    // Teachers
+    { id: 'T001', name: 'Dr. Amit Seth', role: 'teacher', identifier: '9876543210', email: 'amit.seth@university.edu' },
+    { id: 'T002', name: 'Prof. Poonam Garg', role: 'teacher', identifier: '9876543211', email: 'poonam.garg@university.edu' },
+  ],
+  courses: [
+    { 
+      id: 'C001', 
+      name: 'Web Development', 
+      code: 'CS301', 
+      teacherId: 'T001',
+      semester: 'Fall 2025',
+      studentIds: ['S001', 'S002', 'S003', 'S004']
+    },
+    { 
+      id: 'C002', 
+      name: 'Data Structures', 
+      code: 'CS201', 
+      teacherId: 'T001',
+      semester: 'Fall 2025',
+      studentIds: ['S001', 'S002', 'S005', 'S006']
+    },
+    { 
+      id: 'C003', 
+      name: 'Database Systems', 
+      code: 'CS302', 
+      teacherId: 'T002',
+      semester: 'Fall 2025',
+      studentIds: ['S002', 'S003', 'S004', 'S005', 'S006']
+    },
   ],
   assignments: [
+    // Individual Assignments
     {
       id: 'A001',
-      title: 'React Fundamentals Project',
-      description:
-        'Build a complete React application demonstrating core concepts including hooks, components, and state management.',
+      title: 'React Hooks Assignment',
+      description: 'Build a custom hook for form validation. Every student must submit individually.',
       driveLink: 'https://drive.google.com/drive/folders/example1',
-      dueDate: '2025-11-15',
+      dueDate: '2025-11-15T23:59:00',
+      courseId: 'C001',
       createdBy: 'T001',
       createdAt: '2025-10-20',
       totalMarks: 100,
+      submissionType: 'individual',
     },
     {
       id: 'A002',
-      title: 'Database Design Assignment',
-      description:
-        'Design and implement a normalized database schema for an e-commerce system.',
+      title: 'Algorithm Complexity Report',
+      description: 'Individual analysis of sorting algorithm time complexity.',
       driveLink: 'https://drive.google.com/drive/folders/example2',
-      dueDate: '2025-11-10',
+      dueDate: '2025-11-20T23:59:00',
+      courseId: 'C002',
+      createdBy: 'T001',
+      createdAt: '2025-10-22',
+      totalMarks: 75,
+      submissionType: 'individual',
+    },
+    
+    // Group Assignments
+    {
+      id: 'A003',
+      title: 'E-Commerce Database Design (Group)',
+      description: 'Design and implement a normalized database schema. GROUP ASSIGNMENT - Only team leader can acknowledge submission.',
+      driveLink: 'https://drive.google.com/drive/folders/example3',
+      dueDate: '2025-11-18T23:59:00',
+      courseId: 'C001',
       createdBy: 'T001',
       createdAt: '2025-10-18',
       totalMarks: 50,
+      submissionType: 'group',
     },
     {
-      id: 'A003',
-      title: 'Algorithm Analysis Report',
-      description:
-        'Analyze time and space complexity of sorting algorithms with practical examples.',
-      driveLink: 'https://drive.google.com/drive/folders/example3',
-      dueDate: '2025-11-20',
+      id: 'A004',
+      title: 'SQL Optimization Project (Group)',
+      description: 'Optimize complex queries and create performance reports. GROUP ASSIGNMENT - Team leader acknowledgment required.',
+      driveLink: 'https://drive.google.com/drive/folders/example4',
+      dueDate: '2025-11-25T23:59:00',
+      courseId: 'C003',
       createdBy: 'T002',
-      createdAt: '2025-10-22',
-      totalMarks: 75,
+      createdAt: '2025-10-25',
+      totalMarks: 60,
+      submissionType: 'group',
+    },
+    {
+      id: 'A005',
+      title: 'Data Structure Implementation (Group)',
+      description: 'Implement custom data structures as a team. GROUP ASSIGNMENT.',
+      driveLink: 'https://drive.google.com/drive/folders/example5',
+      dueDate: '2025-11-22T23:59:00',
+      courseId: 'C002',
+      createdBy: 'T001',
+      createdAt: '2025-10-23',
+      totalMarks: 80,
+      submissionType: 'group',
     },
   ],
+  groups: [
+    // Group 1
+    {
+      id: 'G001',
+      name: 'Team Alpha',
+      courseId: 'C001',
+      assignmentId: 'A003',
+      leaderId: 'S001', // esh is leader
+      memberIds: ['S001', 'S002', 'S003'],
+      createdAt: '2025-10-21',
+    },
+    // Group 2
+    {
+      id: 'G002',
+      name: 'Team Beta',
+      courseId: 'C003',
+      assignmentId: 'A004',
+      leaderId: 'S004',
+      memberIds: ['S004', 'S005'],
+      createdAt: '2025-10-26',
+    },
+    // Group 3
+    {
+      id: 'G003',
+      name: 'Team Gamma',
+      courseId: 'C002',
+      assignmentId: 'A005',
+      leaderId: 'S001', 
+      memberIds: ['S001', 'S002'],
+      createdAt: '2025-10-24',
+    },
+    // isha (S006) is NOT in any group for Assignment A004 - will see "no group" message
+  ],
   submissions: [
+    // Individual submission example
     {
       id: 'SUB001',
       assignmentId: 'A001',
-      studentId: 'S001',
-      status: 'submitted',
-      submittedAt: '2025-11-05T10:30:00Z',
-      confirmedAt: '2025-11-05T10:32:00Z',
-      marks: 85,
-    },
-    {
-      id: 'SUB002',
-      assignmentId: 'A002',
-      studentId: 'S001',
-      status: 'submitted',
-      submittedAt: '2025-11-08T14:20:00Z',
-      confirmedAt: '2025-11-08T14:22:00Z',
-      marks: 45,
-    },
-    {
-      id: 'SUB003',
-      assignmentId: 'A001',
-      studentId: 'S002',
+      studentId: 'S002', 
+      groupId: null,
       status: 'submitted',
       submittedAt: '2025-11-06T09:15:00Z',
-      confirmedAt: '2025-11-06T09:17:00Z',
+      acknowledgedAt: '2025-11-06T09:17:00Z',
       marks: 92,
     },
+    // Group submission example - Leader esh acknowledged for whole group
     {
-      id: 'SUB004',
-      assignmentId: 'A002',
-      studentId: 'S003',
+      id: 'SUB002',
+      assignmentId: 'A003',
+      studentId: null, // No individual student - it's a group submission
+      groupId: 'G001',
       status: 'submitted',
-      submittedAt: '2025-11-09T16:45:00Z',
-      confirmedAt: '2025-11-09T16:47:00Z',
-      marks: 48,
+      submittedAt: '2025-11-08T14:20:00Z',
+      acknowledgedAt: '2025-11-08T14:22:00Z',
+      acknowledgedBy: 'S001', // esh acknowledged
+      marks: 45,
     },
   ],
 };
@@ -96,64 +176,104 @@ const INITIAL_DATA = {
 export const AppProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [users, setUsers] = useState([]);
+  const [courses, setCourses] = useState([]);
   const [assignments, setAssignments] = useState([]);
   const [submissions, setSubmissions] = useState([]);
+  const [groups, setGroups] = useState([]);
+  const [toast, setToast] = useState(null);
+  const [isInitialized, setIsInitialized] = useState(false);
 
+  // Initialize data on first mount
   useEffect(() => {
-    const storedUser = localStorage.getItem('currentUser');
     const storedUsers = localStorage.getItem('users');
+    const storedCourses = localStorage.getItem('courses');
     const storedAssignments = localStorage.getItem('assignments');
     const storedSubmissions = localStorage.getItem('submissions');
+    const storedGroups = localStorage.getItem('groups');
+    const storedUser = localStorage.getItem('currentUser');
 
-    if (storedUser) setCurrentUser(JSON.parse(storedUser));
+    // If no data in localStorage, use initial data
+    if (!storedUsers || !storedCourses) {
+      console.log('Initializing with default data...');
+      setUsers(INITIAL_DATA.users);
+      setCourses(INITIAL_DATA.courses);
+      setAssignments(INITIAL_DATA.assignments);
+      setSubmissions(INITIAL_DATA.submissions);
+      setGroups(INITIAL_DATA.groups);
+      
+      // Save to localStorage
+      localStorage.setItem('users', JSON.stringify(INITIAL_DATA.users));
+      localStorage.setItem('courses', JSON.stringify(INITIAL_DATA.courses));
+      localStorage.setItem('assignments', JSON.stringify(INITIAL_DATA.assignments));
+      localStorage.setItem('submissions', JSON.stringify(INITIAL_DATA.submissions));
+      localStorage.setItem('groups', JSON.stringify(INITIAL_DATA.groups));
+    } else {
+      console.log('Loading data from localStorage...');
+      setUsers(JSON.parse(storedUsers));
+      setCourses(JSON.parse(storedCourses));
+      setAssignments(JSON.parse(storedAssignments));
+      setSubmissions(JSON.parse(storedSubmissions));
+      setGroups(JSON.parse(storedGroups));
+    }
 
-    setUsers(storedUsers ? JSON.parse(storedUsers) : INITIAL_DATA.users);
-    setAssignments(storedAssignments ? JSON.parse(storedAssignments) : INITIAL_DATA.assignments);
-    setSubmissions(storedSubmissions ? JSON.parse(storedSubmissions) : INITIAL_DATA.submissions);
+    if (storedUser) {
+      setCurrentUser(JSON.parse(storedUser));
+    }
+
+    setIsInitialized(true);
   }, []);
 
-useEffect(() => {
-  try {
-    const storedUser = localStorage.getItem('currentUser');
-    const storedUsers = JSON.parse(localStorage.getItem('users') || "null");
-    const storedAssignments = JSON.parse(localStorage.getItem('assignments') || "null");
-    const storedSubmissions = JSON.parse(localStorage.getItem('submissions') || "null");
-
-    if (storedUser) setCurrentUser(JSON.parse(storedUser));
-    setUsers(Array.isArray(storedUsers) && storedUsers.length ? storedUsers : INITIAL_DATA.users);
-    setAssignments(Array.isArray(storedAssignments) && storedAssignments.length ? storedAssignments : INITIAL_DATA.assignments);
-    setSubmissions(Array.isArray(storedSubmissions) && storedSubmissions.length ? storedSubmissions : INITIAL_DATA.submissions);
-  } catch (error) {
-    console.error("Error loading localStorage data:", error);
-    setUsers(INITIAL_DATA.users);
-    setAssignments(INITIAL_DATA.assignments);
-    setSubmissions(INITIAL_DATA.submissions);
-  }
-}, []);
-
+  // Persist data to localStorage when it changes
+  useEffect(() => {
+    if (isInitialized && users.length > 0) {
+      localStorage.setItem('users', JSON.stringify(users));
+    }
+  }, [users, isInitialized]);
 
   useEffect(() => {
-    localStorage.setItem('assignments', JSON.stringify(assignments));
-  }, [assignments]);
+    if (isInitialized && courses.length > 0) {
+      localStorage.setItem('courses', JSON.stringify(courses));
+    }
+  }, [courses, isInitialized]);
 
   useEffect(() => {
-    localStorage.setItem('submissions', JSON.stringify(submissions));
-  }, [submissions]);
+    if (isInitialized) {
+      localStorage.setItem('assignments', JSON.stringify(assignments));
+    }
+  }, [assignments, isInitialized]);
 
- const login = (identifier, role) => {
-  console.log("DEBUG USERS:", users); 
-  const user = users.find(u => u.identifier === identifier && u.role === role);
-  if (user) {
-    setCurrentUser(user);
-    localStorage.setItem('currentUser', JSON.stringify(user));
-    return true;
-  }
-  return false;
-};
+  useEffect(() => {
+    if (isInitialized) {
+      localStorage.setItem('submissions', JSON.stringify(submissions));
+    }
+  }, [submissions, isInitialized]);
+
+  useEffect(() => {
+    if (isInitialized) {
+      localStorage.setItem('groups', JSON.stringify(groups));
+    }
+  }, [groups, isInitialized]);
+
+  const showToast = (message, type = 'success') => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3000);
+  };
+
+  const login = (identifier, role) => {
+    const user = users.find(u => u.identifier === identifier && u.role === role);
+    if (user) {
+      setCurrentUser(user);
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      showToast(`Welcome back, ${user.name}!`, 'success');
+      return true;
+    }
+    return false;
+  };
 
   const logout = () => {
     setCurrentUser(null);
     localStorage.removeItem('currentUser');
+    showToast('Logged out successfully', 'info');
   };
 
   const addAssignment = (assignment) => {
@@ -164,40 +284,68 @@ useEffect(() => {
       createdAt: new Date().toISOString().split('T')[0],
     };
     setAssignments([...assignments, newAssignment]);
+    showToast('Assignment created successfully!', 'success');
   };
 
-  const addSubmission = (assignmentId) => {
+  const addSubmission = (assignmentId, groupId = null) => {
     const newSubmission = {
       id: `SUB${Date.now()}`,
       assignmentId,
-      studentId: currentUser.id,
+      studentId: groupId ? null : currentUser.id,
+      groupId,
       status: 'submitted',
       submittedAt: new Date().toISOString(),
-      confirmedAt: new Date().toISOString(),
+      acknowledgedAt: new Date().toISOString(),
+      acknowledgedBy: groupId ? currentUser.id : null,
       marks: null,
     };
     setSubmissions([...submissions, newSubmission]);
+    showToast('Submission acknowledged successfully!', 'success');
   };
 
   const updateSubmissionMarks = (submissionId, marks) => {
-    setSubmissions(
-      submissions.map((sub) =>
-        sub.id === submissionId ? { ...sub, marks: parseInt(marks) } : sub
-      )
-    );
+    setSubmissions(submissions.map(sub => 
+      sub.id === submissionId ? { ...sub, marks: parseInt(marks) } : sub
+    ));
+    showToast('Marks updated successfully!', 'success');
+  };
+
+  const createGroup = (groupData) => {
+    const newGroup = {
+      ...groupData,
+      id: `G${Date.now()}`,
+      createdAt: new Date().toISOString(),
+    };
+    setGroups([...groups, newGroup]);
+    showToast('Group created successfully!', 'success');
   };
 
   const value = {
     currentUser,
     users,
+    courses,
     assignments,
     submissions,
+    groups,
+    toast,
     login,
     logout,
     addAssignment,
     addSubmission,
     updateSubmissionMarks,
+    createGroup,
+    showToast,
   };
+
+  // Don't render until initialized
+  if (!isInitialized) {
+    return <div className="min-h-screen flex items-center justify-center">
+      <div className="text-center">
+        <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+        <p className="text-gray-600">Loading...</p>
+      </div>
+    </div>;
+  }
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

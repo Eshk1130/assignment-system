@@ -5,7 +5,9 @@ import AssignmentCard from './AssignmentCard';
 const AssignmentsTab = ({ 
   pendingAssignments, 
   submittedAssignments, 
-  userSubmissions, 
+  userSubmissions,
+  groups,
+  currentUser,
   onSubmit 
 }) => {
   return (
@@ -20,7 +22,7 @@ const AssignmentsTab = ({
         </div>
         
         {pendingAssignments.length === 0 ? (
-          <div className="bg-white rounded-lg p-8 text-center">
+          <div className="bg-white rounded-lg p-8 text-center animate-fadeIn">
             <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-3" />
             <p className="text-gray-600">All caught up! No pending assignments.</p>
           </div>
@@ -32,6 +34,8 @@ const AssignmentsTab = ({
                 assignment={assignment}
                 onSubmit={onSubmit}
                 isSubmitted={false}
+                groups={groups}
+                currentUser={currentUser}
               />
             ))}
           </div>
@@ -48,7 +52,7 @@ const AssignmentsTab = ({
         </div>
         
         {submittedAssignments.length === 0 ? (
-          <div className="bg-white rounded-lg p-8 text-center">
+          <div className="bg-white rounded-lg p-8 text-center animate-fadeIn">
             <FileText className="w-12 h-12 text-gray-400 mx-auto mb-3" />
             <p className="text-gray-600">No submissions yet.</p>
           </div>
@@ -64,6 +68,8 @@ const AssignmentsTab = ({
                   assignment={assignment}
                   isSubmitted={true}
                   submission={submission}
+                  groups={groups}
+                  currentUser={currentUser}
                 />
               );
             })}
